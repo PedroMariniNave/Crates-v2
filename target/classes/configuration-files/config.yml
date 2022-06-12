@@ -1,0 +1,43 @@
+Settings:
+  commands:
+    admin:
+      command: cratesadmin
+      aliases: []
+      permission: 'crates.admin'
+      permission-message: '&cVocê não possui permissão para executar esse comando!'
+    collect:
+      command: collect
+      aliases: [coletar, key, keys]
+  pending-keys-warn-every: 600 # segundos
+
+Messages:
+  command-usage:
+    - ''
+    - '&cComandos disponíveis:'
+    - ''
+    - ' &c/{cmd} key/give <jogador> <crate> <quantia>'
+    - ' &c/{cmd} set <crate>'
+    - ' &c/{cmd} remove'
+    - ''
+  pending-keys-warn:
+    - ''
+    - ' &8* &7Você possui &f{amount} &7chaves pendentes!'
+    - ' &8* &7Para coletar digite &f/coletar&7!'
+    - ''
+  null-block: '&cVocê precisa estar olhando para um bloco!'
+  null-crate: '&cVocê precisa estar olhando para uma crate!'
+  invalid-crate: '&cEssa crate não existe!'
+  invalid-amount: '&cA quantia informada é inválida!'
+  existing-crate: '&cJá existe uma crate nesse local!'
+  offline-player: '&cEsse jogador está offline!'
+  need-key: '&cVocê precisa estar segurando a chave dessa caixa!'
+  need-space-crate: '&cA abertura da caixa foi cancelada por falta de espaço no inventário!'
+  need-space-key: '&cVocê não possui espaço suficiente no inventário!'
+  give-all: '&7Você recebeu &f{amount}x {key}&7! &8(Giveall)'
+  zero-keys: '&cVocê não possui nenhuma chave para coletar!'
+  new-keys: '&7Você possui novas chaves armazenadas! Digite &f/coletar &7para coletá-las!'
+
+Titles:
+  reward:
+    title: ''
+    subtitle: '{item}'

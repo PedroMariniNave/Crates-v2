@@ -1,0 +1,33 @@
+Crate-Settings:
+  hologram:
+    - '&a&lCaixa Básica'
+    - ''
+    - '&fUma caixa com itens'
+    - '&fcomuns e básicos!'
+    - ''
+    - '&fBotão direito: &7Abrir caixa'
+
+Key:
+  type: TRIPWIRE_HOOK
+  name: '&aChave Básica'
+  glow: true
+
+Rewards:
+  1:
+    chance: 50
+    display:
+      type: DIAMOND_SWORD
+      glow: true
+      name: '&aEspada Básica'
+    commands:
+      - 'darkit {player} espada'
+  2:
+    chance: 50
+    display:
+      type: DIAMOND_AXE
+      glow: true
+      name: '&aMachado Básico'
+    commands:
+      - 'darkit {player} machado'
+
+Locations:

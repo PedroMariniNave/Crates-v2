@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Crates">
+    <output-path>$USER_HOME$/Desktop/Pixel/plugins</output-path>
+    <root id="archive" name="Crates.jar">
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/xyz/xenondevs/particle/1.6.3/particle-1.6.3.jar" path-in-jar="/" />
+      <element id="module-output" name="Crates-557513135817588c5bbe97118e7cb1c3c82ac184" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/de/tr7zw/item-nbt-api-plugin/2.10.0-SNAPSHOT/item-nbt-api-plugin-2.10.0-20220607.174012-4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
