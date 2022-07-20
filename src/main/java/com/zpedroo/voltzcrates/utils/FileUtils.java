@@ -135,7 +135,7 @@ public class FileUtils {
             return folder;
         }
 
-        public boolean isRequireEmpty() {
+        public boolean isEmptyRequired() {
             return requireEmpty;
         }
     }
@@ -148,19 +148,26 @@ public class FileUtils {
         public FileManager(Files files) {
             this.file = new java.io.File(plugin.getDataFolder() + (files.getFolder().isEmpty() ? "" : "/" + files.getFolder()), files.getName() + ".yml");
 
-            if (!this.file.exists()) {
-                try {
-                    this.file.getParentFile().mkdirs();
-                    this.file.createNewFile();
+            if (!file.exists()) {
+                if (files.isEmptyRequired()) {
+                    File folder = new File(plugin.getDataFolder(), files.getFolder());
+                    if (folder.listFiles() != null) {
+                        if (Stream.of(folder.listFiles()).map(YamlConfiguration::loadConfiguration).count() > 0) return;
+                    }
+                }
 
-                    copy(plugin.getResource((files.getResource().isEmpty() ? "" : files.getResource() + "/") + files.getName() + ".yml"), this.file);
+                try {
+                    file.getParentFile().mkdirs();
+                    file.createNewFile();
+
+                    copy(plugin.getResource((files.getResource().isEmpty() ? "" : files.getResource() + "/") + files.getName() + ".yml"), file);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
             try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(this.file), StandardCharsets.UTF_8));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
                 fileConfig = YamlConfiguration.loadConfiguration(reader);
                 reader.close();
             } catch (Exception ex) {
