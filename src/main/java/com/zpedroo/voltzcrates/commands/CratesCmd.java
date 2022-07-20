@@ -89,18 +89,13 @@ public class CratesCmd implements CommandExecutor {
                         return true;
                     }
 
-                    try {
-                        amount = Integer.parseInt(args[3]);
-                    } catch (Exception ex) {
-                        // ignore
-                    }
-
+                    amount = getIntByString(args[3]);
                     if (amount <= 0) {
                         sender.sendMessage(Messages.INVALID_AMOUNT);
                         return true;
                     }
 
-                    giveKeys(target, crate, amount, false);
+                    giveKeysItem(target, crate, amount);
                     return true;
                 case "GIVEALL":
                     if (args.length < 3) break;
@@ -111,12 +106,7 @@ public class CratesCmd implements CommandExecutor {
                         return true;
                     }
 
-                    try {
-                        amount = Integer.parseInt(args[2]);
-                    } catch (Exception ex) {
-                        // ignore
-                    }
-
+                    amount = getIntByString(args[2]);
                     if (amount <= 0) {
                         sender.sendMessage(Messages.INVALID_AMOUNT);
                         return true;
@@ -125,7 +115,7 @@ public class CratesCmd implements CommandExecutor {
                     final int finalAmount = amount;
                     final Crate finalCrate = crate;
                     Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
-                        giveKeys(onlinePlayer, finalCrate, finalAmount, true);
+                        storagePlayerKeys(onlinePlayer, finalCrate, finalAmount, true);
                     });
                     return true;
             }
@@ -141,7 +131,29 @@ public class CratesCmd implements CommandExecutor {
         return false;
     }
 
-    private void giveKeys(Player player, Crate crate, int amount, boolean keyAll) {
+    private int getIntByString(String str) {
+        int ret = 0;
+        try {
+            ret = Integer.parseInt(str);
+        } catch (Exception ex) {
+            // ignore
+        }
+
+        return ret;
+    }
+
+    private void giveKeysItem(Player player, Crate crate, int amount) {
+        ItemStack item = crate.getKeyItem();
+        item.setAmount(amount);
+        if (player.getInventory().firstEmpty() != -1) {
+            player.getInventory().addItem(item);
+            return;
+        }
+
+        player.getWorld().dropItemNaturally(player.getLocation(), item);
+    }
+
+    private void storagePlayerKeys(Player player, Crate crate, int amount, boolean keyAll) {
         PlayerData data = DataManager.getInstance().getPlayerData(player);
         data.addPendingKey(crate, amount);
 
